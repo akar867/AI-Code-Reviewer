@@ -10,7 +10,7 @@ public class ReviewRequest {
     private String code;
 
     @NotBlank(message = "Language selection is required")
-    private String language;
+    private String ref;
 
     public String getCode() {
         return code;
@@ -20,11 +20,11 @@ public class ReviewRequest {
         this.code = code;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getRef() {
+        return ref;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setRef(String ref) {
+        this.ref = ref;
     }
 }

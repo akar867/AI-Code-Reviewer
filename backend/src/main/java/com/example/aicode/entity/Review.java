@@ -15,79 +15,79 @@ import java.time.LocalDateTime;
 @Table(name = "reviews")
 public class Review {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Lob
-    @Column(name = "submitted_code", nullable = false)
-    private String submittedCode;
+	@Lob
+	@Column(name = "submitted_code", nullable = false, columnDefinition = "LONGTEXT")
+	private String submittedCode;
 
-    @Column(nullable = false)
-    private String language;
+	@Column(nullable = false)
+	private String ref;
 
-    @Lob
-    @Column(name = "review_result", nullable = false, columnDefinition = "LONGTEXT")
-    private String reviewResult;
+	@Lob
+	@Column(name = "review_result", nullable = false, columnDefinition = "LONGTEXT")
+	private String reviewResult;
 
-    @Column(name = "quality_score")
-    private Integer qualityScore;
+	@Column(name = "quality_score")
+	private Integer qualityScore;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
-    @PrePersist
-    public void prePersist() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
-    }
+	@PrePersist
+	public void prePersist() {
+		if (createdAt == null) {
+			createdAt = LocalDateTime.now();
+		}
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getSubmittedCode() {
-        return submittedCode;
-    }
+	public String getSubmittedCode() {
+		return submittedCode;
+	}
 
-    public void setSubmittedCode(String submittedCode) {
-        this.submittedCode = submittedCode;
-    }
+	public void setSubmittedCode(String submittedCode) {
+		this.submittedCode = submittedCode;
+	}
 
-    public String getLanguage() {
-        return language;
-    }
+	public String getRef() {
+		return ref;
+	}
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
 
-    public String getReviewResult() {
-        return reviewResult;
-    }
+	public String getReviewResult() {
+		return reviewResult;
+	}
 
-    public void setReviewResult(String reviewResult) {
-        this.reviewResult = reviewResult;
-    }
+	public void setReviewResult(String reviewResult) {
+		this.reviewResult = reviewResult;
+	}
 
-    public Integer getQualityScore() {
-        return qualityScore;
-    }
+	public Integer getQualityScore() {
+		return qualityScore;
+	}
 
-    public void setQualityScore(Integer qualityScore) {
-        this.qualityScore = qualityScore;
-    }
+	public void setQualityScore(Integer qualityScore) {
+		this.qualityScore = qualityScore;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 }

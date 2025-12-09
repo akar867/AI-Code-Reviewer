@@ -35,21 +35,21 @@ public class ReviewService {
     }
 
     public ReviewResponse createReview(ReviewRequest request) {
-        ReviewResult reviewResult = aiReviewService.reviewCode(request.getCode(), request.getLanguage());
+        ReviewResult reviewResult = aiReviewService.reviewCode(request.getCode(), request.getRef());
         Review review = new Review();
-        review.setLanguage(request.getLanguage());
+        review.setRef(request.getRef());
         review.setSubmittedCode(request.getCode());
         review.setQualityScore(reviewResult.getQualityScore());
         review.setReviewResult(writeResult(reviewResult));
         Review saved = reviewRepository.save(review);
-        return new ReviewResponse(saved.getId(), saved.getLanguage(), saved.getSubmittedCode(), saved.getCreatedAt(), reviewResult);
+        return new ReviewResponse(saved.getId(), saved.getRef(), saved.getSubmittedCode(), saved.getCreatedAt(), reviewResult);
     }
 
     public List<ReviewSummary> getRecentReviews() {
         return reviewRepository.findTop20ByOrderByCreatedAtDesc().stream()
                 .map(review -> new ReviewSummary(
                         review.getId(),
-                        review.getLanguage(),
+                        review.getRef(),
                         review.getQualityScore(),
                         review.getCreatedAt()))
                 .collect(Collectors.toList());
@@ -59,7 +59,7 @@ public class ReviewService {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new ReviewNotFoundException(id));
         ReviewResult reviewResult = readResult(review.getReviewResult());
-        return new ReviewResponse(review.getId(), review.getLanguage(), review.getSubmittedCode(), review.getCreatedAt(), reviewResult);
+        return new ReviewResponse(review.getId(), review.getRef(), review.getSubmittedCode(), review.getCreatedAt(), reviewResult);
     }
 
     private String writeResult(ReviewResult reviewResult) {

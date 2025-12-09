@@ -24,12 +24,13 @@ public class AiReviewService {
 
     private static final Logger log = LoggerFactory.getLogger(AiReviewService.class);
 
-    public static final String PROMPT_TEMPLATE = "Review the following %s code. Identify concrete issues, offer actionable " +
-            "suggestions, rate the overall quality from 1-10, and list any best practices evidenced or missing." +
-            "\nRespond strictly with JSON matching this schema: {\\"issues\\": string[], \\" +
-            "suggestions\\": string[], \\" +
-            "qualityScore\\": number, \\" +
-            "bestPractices\\": string[] }.";
+    public static final String PROMPT_TEMPLATE =  "Review the following %s code. Identify concrete issues, offer actionable "
+    	    + "suggestions, rate the overall quality from 1-10, and list any best practices evidenced or missing.\n"
+    	    + "Respond strictly with JSON matching this schema: {"
+    	    + "\\\"issues\\\": [], "
+    	    + "\\\"suggestions\\\": [], "
+    	    + "\\\"qualityScore\\\": 0, "
+    	    + "\\\"bestPractices\\\": [] }.";
 
     private final RestTemplate restTemplate;
     private final AiClientProperties properties;
