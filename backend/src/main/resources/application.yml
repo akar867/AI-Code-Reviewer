@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: distributed-file-storage
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/distributed-file-storage
+  servlet:
+    multipart:
+      max-file-size: 512MB
+      max-request-size: 512MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  level:
+    com.example.dfs: INFO
+
+dfs:
+  storage:
+    mode: LOCAL
+    localBasePath: storage
+  nodes:
+    definitions:
+      - id: node-a
+        name: Alpha
+        capacityGb: 5
+      - id: node-b
+        name: Beta
+        capacityGb: 5
+      - id: node-c
+        name: Gamma
+        capacityGb: 5
