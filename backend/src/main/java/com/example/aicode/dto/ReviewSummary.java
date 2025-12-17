@@ -5,16 +5,16 @@ import java.time.LocalDateTime;
 public class ReviewSummary {
 
     private Long id;
-    private String ref;
+    private String language;
     private Integer qualityScore;
     private LocalDateTime createdAt;
 
     public ReviewSummary() {
     }
 
-    public ReviewSummary(Long id, String ref, Integer qualityScore, LocalDateTime createdAt) {
+    public ReviewSummary(Long id, String language, Integer qualityScore, LocalDateTime createdAt) {
         this.id = id;
-        this.ref = ref;
+        this.language = language;
         this.qualityScore = qualityScore;
         this.createdAt = createdAt;
     }
@@ -27,12 +27,12 @@ public class ReviewSummary {
         this.id = id;
     }
 
-    public String getRef() {
-        return ref;
+    public String getlanguage() {
+        return language;
     }
 
-    public void setLanguage(String ref) {
-        this.ref = ref;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Integer getQualityScore() {

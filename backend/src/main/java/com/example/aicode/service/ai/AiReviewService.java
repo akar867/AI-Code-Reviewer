@@ -44,17 +44,17 @@ public class AiReviewService {
         this.objectMapper = objectMapper;
     }
 
-    public ReviewResult reviewCode(String code, String language) {
+    public ReviewResult reviewCode(String code) {
         if (properties.isMockMode() || !StringUtils.hasText(properties.getApiKey())) {
             log.debug("Returning mock AI review (mockMode={}, apiKeyPresent={})", properties.isMockMode(),
                     StringUtils.hasText(properties.getApiKey()));
-            return buildMockResult(code, language);
+            return buildMockResult(code);
         }
 
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
                     properties.getBaseUrl(),
-                    buildHttpRequest(code, language),
+                    buildHttpRequest(code),
                     String.class);
             if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
                 throw new AiReviewException("AI provider returned status " + response.getStatusCode());
@@ -65,7 +65,7 @@ public class AiReviewService {
         }
     }
 
-    private HttpEntity<Map<String, Object>> buildHttpRequest(String code, String language) {
+    private HttpEntity<Map<String, Object>> buildHttpRequest(String code) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(properties.getApiKey());
@@ -74,15 +74,15 @@ public class AiReviewService {
                 "model", properties.getModel(),
                 "messages", List.of(
                         Map.of("role", "system", "content", properties.getSystemPrompt()),
-                        Map.of("role", "user", "content", buildUserPrompt(code, language))
+                        Map.of("role", "user", "content", buildUserPrompt(code))
                 ),
                 "response_format", Map.of("type", "json_object")
         );
         return new HttpEntity<>(body, headers);
     }
 
-    private String buildUserPrompt(String code, String language) {
-        return PROMPT_TEMPLATE.formatted(language) + "\n\n" + code;
+    private String buildUserPrompt(String code) {
+        return PROMPT_TEMPLATE + "\n\n" + code;
     }
 
     private ReviewResult parseAiResponse(String payload) throws JsonProcessingException {
@@ -113,7 +113,7 @@ public class AiReviewService {
         return sanitized.trim();
     }
 
-    private ReviewResult buildMockResult(String code, String language) {
+    private ReviewResult buildMockResult(String code) {
         ReviewResult result = new ReviewResult();
         result.setIssues(List.of(
                 "No input validation present; consider guarding against malformed data.",
@@ -128,10 +128,10 @@ public class AiReviewService {
         result.setQualityScore(heuristicScore);
         result.setBestPractices(List.of(
                 "Keep functions pure where possible",
-                "Prefer dependency injection over singletons",
+                "Planguageer dependency injection over singletons",
                 "Log structured events instead of concatenated strings"
         ));
-        result.setRawResponse("Mock response for " + language + " snippet");
+        result.setRawResponse("Mock response snippet");
         return result;
     }
 }

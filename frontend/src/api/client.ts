@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 export const submitReview = async (payload: ReviewRequestPayload): Promise<ReviewResponse> => {
-  const { data } = await api.post<ReviewResponse>('/review', payload);
+  const { data } = await api.post<ReviewResponse>('/review/submit', payload);
   return data;
 };
 

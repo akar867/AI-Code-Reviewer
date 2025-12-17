@@ -24,7 +24,7 @@ public class Review {
 	private String submittedCode;
 
 	@Column(nullable = false)
-	private String ref;
+	private String language;
 
 	@Lob
 	@Column(name = "review_result", nullable = false, columnDefinition = "LONGTEXT")
@@ -59,12 +59,12 @@ public class Review {
 		this.submittedCode = submittedCode;
 	}
 
-	public String getRef() {
-		return ref;
+	public String getlanguage() {
+		return language;
 	}
 
-	public void setRef(String ref) {
-		this.ref = ref;
+	public void setlanguage(String language) {
+		this.language = language;
 	}
 
 	public String getReviewResult() {

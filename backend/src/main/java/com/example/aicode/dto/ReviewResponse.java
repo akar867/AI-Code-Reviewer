@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class ReviewResponse {
 
     private Long id;
-    private String ref;
+    private String language;
     private String submittedCode;
     private LocalDateTime createdAt;
     private ReviewResult reviewResult;
@@ -13,9 +13,9 @@ public class ReviewResponse {
     public ReviewResponse() {
     }
 
-    public ReviewResponse(Long id, String ref, String submittedCode, LocalDateTime createdAt, ReviewResult reviewResult) {
+    public ReviewResponse(Long id, String language, String submittedCode, LocalDateTime createdAt, ReviewResult reviewResult) {
         this.id = id;
-        this.ref = ref;
+        this.language = language;
         this.submittedCode = submittedCode;
         this.createdAt = createdAt;
         this.reviewResult = reviewResult;
@@ -29,12 +29,12 @@ public class ReviewResponse {
         this.id = id;
     }
 
-    public String getRef() {
-        return ref;
+    public String getlanguage() {
+        return language;
     }
 
-    public void setLanguage(String ref) {
-        this.ref = ref;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getSubmittedCode() {

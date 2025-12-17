@@ -60,7 +60,7 @@ const ReviewForm = ({ onReview }: Props) => {
           />
         </label>
         {error && <p style={{ color: '#b91c1c' }}>{error}</p>}
-        <button type="submit" disabled={loading}>
+        <button type="submit" >
           {loading ? 'Reviewing…' : 'Submit for review'}
         </button>
       </form>
