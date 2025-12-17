@@ -84,12 +84,11 @@ public class ReviewController {
     	            return ResponseEntity.badRequest().body("Empty patch content");
     	        }
 
-    	        // 4️⃣ Detect language
+    	        // 4️ Detect language
     	        String language = reviewService.detectLanguageFromPatch(code);
 
     	        ReviewRequest request = new ReviewRequest();
     	        request.setCode(code);
-    	       // request.setl((String) pullRequest.get("url"));
     	        request.setlanguage(language);
 
     	        reviewService.createReview(request);
